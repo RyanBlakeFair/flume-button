@@ -1,16 +1,19 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 
 const useLongPress = (
     onLongPress,
     onClick,
-    { shouldPreventDefault = true, delay = 300 } = {}
+    { shouldPreventDefault = true, delay = 500 } = {},
+    videoMode,
+    longPressTriggered,
+    setLongPressTriggered,
 ) => {
-    const [longPressTriggered, setLongPressTriggered] = useState(false);
     const timeout = useRef();
     const target = useRef();
 
     const start = useCallback(
         event => {
+            console.log('Button Pressed')
             if (shouldPreventDefault && event.target) {
                 event.target.addEventListener("touchend", preventDefault, {
                     passive: false
@@ -18,30 +21,30 @@ const useLongPress = (
                 target.current = event.target;
             }
             timeout.current = setTimeout(() => {
-                onLongPress(event);
-                setLongPressTriggered(true);
+                videoMode && onLongPress(event);
+                videoMode && setLongPressTriggered(true);
             }, delay);
         },
-        [onLongPress, delay, shouldPreventDefault]
+        [onLongPress, delay, shouldPreventDefault, videoMode, setLongPressTriggered]
     );
 
     const clear = useCallback(
-        (event, shouldTriggerClick = true) => {
+        (event, shouldTriggerClick = !videoMode) => {
             timeout.current && clearTimeout(timeout.current);
             shouldTriggerClick && !longPressTriggered && onClick();
-            setLongPressTriggered(false);
+            videoMode && setLongPressTriggered(false);
+            console.log('Button Released')
             if (shouldPreventDefault && target.current) {
                 target.current.removeEventListener("touchend", preventDefault);
             }
         },
-        [shouldPreventDefault, onClick, longPressTriggered]
+        [shouldPreventDefault, onClick, longPressTriggered, videoMode, setLongPressTriggered]
     );
 
     return {
         onMouseDown: e => start(e),
         onTouchStart: e => start(e),
         onMouseUp: e => clear(e),
-        onMouseLeave: e => clear(e, false),
         onTouchEnd: e => clear(e)
     };
 };
