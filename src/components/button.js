@@ -1,5 +1,4 @@
 import React from 'react'
-import cx from 'classnames'
 import { motion } from "framer-motion";
 
 import useLongPress from "../hooks/useLongPress";
@@ -47,7 +46,7 @@ const flashVars = {
     },
 }
 
-const Button = ({ children, videoMode, flip }) => {
+const Button = ({ children, videoMode }) => {
     const [active, setActive] = React.useState(false)
 
     //detect presses
@@ -66,7 +65,8 @@ const Button = ({ children, videoMode, flip }) => {
     };
 
     const [longPressTriggered, setLongPressTriggered] = React.useState(false);
-    const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions, videoMode, longPressTriggered, setLongPressTriggered);
+    const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions, videoMode, longPressTriggered, setLongPressTriggered, active, setActive);
+
     const [clickTriggered, setClickTriggered] = React.useState(false);
     const toggleClick = () => setClickTriggered(prev => !prev)
 
@@ -86,10 +86,7 @@ const Button = ({ children, videoMode, flip }) => {
                     {children}
 
                     {/* Record Animation */}
-                    {longPressTriggered && <motion.div variants={recordVars} initial="initial" animate="animate" className={cx('absolute h-6 w-6 top-6 bg-red-500 rounded-full', {
-                        'left-6': flip,
-                        'right-6': !flip,
-                    })} />}
+                    {longPressTriggered && <motion.div variants={recordVars} initial="initial" animate="animate" className='absolute h-6 w-6 top-6 right-6 bg-red-500 rounded-full' />}
                 </motion.button>
             </div>
 

@@ -7,6 +7,8 @@ const useLongPress = (
     videoMode,
     longPressTriggered,
     setLongPressTriggered,
+    active,
+    setActive
 ) => {
     const timeout = useRef();
     const target = useRef();
@@ -14,6 +16,9 @@ const useLongPress = (
     const start = useCallback(
         event => {
             console.log('Button Pressed')
+            if (!active) {
+                return setActive(true)
+            }
             if (shouldPreventDefault && event.target) {
                 event.target.addEventListener("touchend", preventDefault, {
                     passive: false
@@ -25,7 +30,7 @@ const useLongPress = (
                 videoMode && setLongPressTriggered(true);
             }, delay);
         },
-        [onLongPress, delay, shouldPreventDefault, videoMode, setLongPressTriggered]
+        [onLongPress, delay, shouldPreventDefault, videoMode, setLongPressTriggered, active, setActive]
     );
 
     const clear = useCallback(
