@@ -1,8 +1,8 @@
 import React from 'react';
 
-import useLongPress from "./hooks/useLongPress";
+import useLongPress from "../hooks/useLongPress";
 
-function Photo() {
+function Video() {
 
     const [longPressCount, setlongPressCount] = React.useState(0)
     const [clickCount, setClickCount] = React.useState(0)
@@ -32,4 +32,4 @@ function Photo() {
     );
 }
 
-export default Photo;
+export default Video;
