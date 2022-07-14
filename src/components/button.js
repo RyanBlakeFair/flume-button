@@ -2,54 +2,13 @@ import React from 'react'
 import { motion } from "framer-motion";
 
 import useLongPress from "../hooks/useLongPress";
-
-const cardVariants = {
-    initial: {
-        y: 300
-    },
-    animate: {
-        y: 50,
-        rotate: -10,
-        transition: {
-            type: "spring",
-            bounce: 0.4,
-            duration: 0.8
-        }
-    }
-};
-
-const recordVars = {
-    initial: {
-        opacity: 0,
-    },
-    animate: {
-        opacity: 1,
-        transition: {
-            duration: .5,
-            repeat: Infinity,
-            repeatType: "reverse",
-        }
-    },
-}
-
-const flashVars = {
-    initial: {
-        opacity: 1,
-    },
-    animate: {
-        opacity: 0,
-        transition: {
-            duration: .2,
-            ease: "easeInOut",
-            repeatType: "reverse",
-        }
-    },
-}
+import { cardVars, recordVars, flashVars } from './animations';
 
 const Button = ({ children, videoMode }) => {
+    //Animation State
     const [active, setActive] = React.useState(false)
 
-    //detect presses
+    // Console Log Button Events
     const onLongPress = () => {
         console.log('longpress is triggered');
     };
@@ -64,6 +23,7 @@ const Button = ({ children, videoMode }) => {
         delay: 500,
     };
 
+    // Long Press State
     const [longPressTriggered, setLongPressTriggered] = React.useState(false);
     const longPressEvent = useLongPress(
         onLongPress,
@@ -76,6 +36,7 @@ const Button = ({ children, videoMode }) => {
         setActive
     );
 
+    //Trigger Camera Flash
     const [clickTriggered, setClickTriggered] = React.useState(false);
     const toggleClick = () => setClickTriggered(prev => !prev)
 
@@ -87,7 +48,7 @@ const Button = ({ children, videoMode }) => {
             >
                 <motion.button
                     className="card relative bg-white w-[200px] md:w-[300px] h-[330px] md:h-[430px]"
-                    variants={cardVariants}
+                    variants={cardVars}
                     initial="initial"
                     animate={active ? "animate" : "initial"}
                     {...longPressEvent}
