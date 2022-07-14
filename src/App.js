@@ -5,9 +5,9 @@ import './css/styles.css'
 
 import Button from './components/button'
 
-function Card({ emoji, hueA, hueB, videoMode }) {
+function Card({ emoji, videoMode }) {
   const hue = (h) => `hsl(${h}, 100%, 50%)`;
-  const background = `linear-gradient(306deg, ${hue(hueA)}, ${hue(hueB)})`;
+  const background = `linear-gradient(306deg, ${hue(260)}, ${hue(290)})`;
 
   return (
     <div className='container'>
@@ -24,8 +24,8 @@ function Card({ emoji, hueA, hueB, videoMode }) {
 export default function App() {
 
   const cards = [
-    { emoji: "📸", hueA: 260, hueB: 290, videoMode: false },
-    { emoji: "🎥", hueA: 260, hueB: 290, videoMode: true },
+    { emoji: "📸", videoMode: false },
+    { emoji: "🎥", videoMode: true },
   ]
 
   return (
