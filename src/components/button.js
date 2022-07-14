@@ -65,7 +65,16 @@ const Button = ({ children, videoMode }) => {
     };
 
     const [longPressTriggered, setLongPressTriggered] = React.useState(false);
-    const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions, videoMode, longPressTriggered, setLongPressTriggered, active, setActive);
+    const longPressEvent = useLongPress(
+        onLongPress,
+        onClick,
+        defaultOptions,
+        videoMode,
+        longPressTriggered,
+        setLongPressTriggered,
+        active,
+        setActive
+    );
 
     const [clickTriggered, setClickTriggered] = React.useState(false);
     const toggleClick = () => setClickTriggered(prev => !prev)
