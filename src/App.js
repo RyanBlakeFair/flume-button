@@ -1,8 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion";
 
-import './css/styles.css'
-
 import Button from './components/button'
 
 function Card({ emoji, videoMode }) {
@@ -10,9 +8,9 @@ function Card({ emoji, videoMode }) {
   const background = `linear-gradient(306deg, ${hue(260)}, ${hue(290)})`;
 
   return (
-    <div className='container'>
-      <motion.div className="card-container">
-        <div className="splash rounded-2xl" style={{ background }} />
+    <div className='container mx-auto max-w-[500px] pb-24'>
+      <motion.div className="card-container overflow-hidden flex items-center justify-center relative pb-t -mb-[120px]">
+        <div className="splash rounded-2xl absolute bottom-0 left-0 right-0 top-0" style={{ background }} />
         <Button videoMode={videoMode}>
           {emoji}
         </Button>

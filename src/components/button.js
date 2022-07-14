@@ -47,7 +47,7 @@ const Button = ({ children, videoMode }) => {
                 onMouseLeave={() => setActive(false)}
             >
                 <motion.button
-                    className="card relative bg-white w-[200px] md:w-[300px] h-[330px] md:h-[430px]"
+                    className="text-[164px] shadow-2xl flex items-center justify-center rounded-2xl relative bg-white w-[200px] md:w-[300px] h-[330px] md:h-[430px]"
                     variants={cardVars}
                     initial="initial"
                     animate={active ? "animate" : "initial"}
