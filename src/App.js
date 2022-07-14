@@ -24,8 +24,8 @@ function Card({ emoji, hueA, hueB, videoMode }) {
 export default function App() {
 
   const cards = [
-    { emoji: "", hueA: 260, hueB: 290, videoMode: false },
-    { emoji: "", hueA: 260, hueB: 290, videoMode: true },
+    { emoji: "📸", hueA: 260, hueB: 290, videoMode: false },
+    { emoji: "🎥", hueA: 260, hueB: 290, videoMode: true },
   ]
 
   return (
